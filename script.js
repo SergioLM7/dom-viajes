@@ -1,110 +1,147 @@
-
-//Checbox
-const menuDestinos = document.createElement('select');
+//Variables
+const section2 = document.querySelector('#section2');
 const section3 = document.querySelector('#section3');
-menuDestinos.name = 'select';
-menuDestinos.id = 'destinos';
-section3.append(menuDestinos);
-
-let valoresOption = [
-    {valor: 'barcelona',
-    text: 'Barcelona',},
-    {valor: 'burgos',
-    text: 'Burgos'},
-    {valor: 'madrid',
-    text: 'Madrid'},
-    {valor: 'coruña',
-    text: 'A Coruña',},
-    {valor: 'valencia',
-    text: 'Valencia'},];
-
-const createOption = (numero, objeto) => {
-    let option = [];
-    for (i=0; i<numero; i++) {
-        option = document.createElement('option');
-        option.value = valoresOption[i].valor;
-        option.text = valoresOption[i].text;
-        menuDestinos.appendChild(option);
-    }
-};
-
-createOption(5, valoresOption);
-
-//Imágenes
-const creadorImagenes = (sec, id) => {
-    const seccion = document.querySelector(sec);
-    console.log(sec);
-    const imagen = document.createElement("img");
-    imagen.id = id;
-    seccion.appendChild(imagen);
-};
-
-creadorImagenes('#section1', 'imagen-portada');
+const menuDestinos = document.createElement('select');
 
 let valoresImagenes = [
     {src: './banner/1.jpg',
-    alt: 'lago al atardecer',},
+    alt: 'lago al atardecer',
+    title: 'Imagen 1',},
     {src: './banner/2.jpg',
-    alt: 'globos aerostáticos',},
+    alt: 'globos aerostáticos',
+    title: 'Imagen 2',},
     {src: './banner/3.jpg',
-    alt: 'cielo al atardecer',},
+    alt: 'cielo al atardecer',
+    title: 'Imagen 3',},
     {src: './banner/4.jpg',
-    alt: 'campo de globos',},
+    alt: 'campo de globos',
+    title: 'Imagen 4',},
     {src: './banner/5.jpg',
-    alt: 'cielo con luna',},
+    alt: 'cielo con luna',
+    title: 'Imagen 5',},
     {src: './banner/6.jpg',
-    alt: 'montañas nevadas',},
+    alt: 'montañas nevadas',
+    title: 'Imagen 6',},
     {src: './banner/7.jpg',
-    alt: 'atardecer en el mar con pájaros',},
+    alt: 'atardecer en el mar con pájaros',
+    title: 'Imagen 7',},
     {src: './banner/8.jpg',
-    alt: 'flores en una rama de árbol',},
+    alt: 'flores en una rama de árbol',
+    title: 'Imagen 8',},
 ]; 
 
-/*const galeria = (imagenes) => {
-    let imagen = document.querySelector('img');
-    imagenes.forEach(element => {
-        imagen.src = valoresImagenes.src;
-        imagen.alt = valoresImagenes.alt;
-    });
-  return imagen;
-};
+let valoresOption = [
+    {valor: 'barcelona',
+    texto: 'Barcelona',},
+    {valor: 'burgos',
+    texto: 'Burgos'},
+    {valor: 'madrid',
+    texto: 'Madrid'},
+    {valor: 'coruña',
+    texto: 'A Coruña',},
+    {valor: 'valencia',
+    texto: 'Valencia'},];
 
-galeria (valoresImagenes);
-
-function inicio() {
-    setInterval(cambia, 3000);
-    };
-window.onload=inicio;*/
-
-
-//Sección caja imagen-texto
-let imagen_2 = [
+let imagenTexto = [
     {src: './viajes/viajes-1.jpg',
     alt: 'playa paradisíaca',
-    texto: 'pppppppppppppppppp',},
+    title: 'Viajes 1',
+    h3: 'Viajes 1',
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
     {src: './viajes/viajes-2.jpg',
     alt: 'cabañas en el agua',
-texto: 'pppppppppppppppppp',},
+    title: 'Viajes 2',
+    h3: 'Viajes 2',
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
     {src: './viajes/viajes-3.jpg',
     alt: 'flechas de direcciones',
-    texto: 'pppppppppppppppppp',},
+    title: 'Viajes 3',
+    h3: 'Viajes 3',
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
     {src: './viajes/viajes-4.jpg',
     alt: 'plaza de España de Sevilla',
-    texto: 'pppppppppppppppppp',},
+    title: 'Viajes 4',
+    h3: 'Viajes 4',
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
 ]; 
 
-const section2 = document.querySelector('#section2');
+//Funciones para mostrar las imágenes aleatorias de apertura
+const creadorImagenes = (element, id) => {
+    const seccion = document.querySelector(element);
+    const imagen = document.createElement("img");
+    imagen.id = id;
+    seccion.append(imagen);
+};
+
+const getRandomImagenes = () => {
+    return Math.floor(Math.random()* valoresImagenes.length);
+};
+
+const imagenAleatoria = () => {
+    let imagen = document.querySelector('img');
+    let imagenFinal = valoresImagenes[getRandomImagenes()];
+        imagen.src = imagenFinal.src;
+        imagen.alt = imagenFinal.alt;
+        imagen.title = imagenFinal.title;
+};
+
+
+//Funciones para la sección de caja imagen-h3-texto
 const crearImagenTexto = (numero) => {
     let caja = [];
     for (let i = 0; i<numero; i++) {
         caja = document.createElement('article');
         caja.id= 'article' + i;
-        section2.appendChild(caja);
+        section2.append(caja);
     }
 };
+
+const crearCajaTexto = () => {
+    let cajas = [];
+    let textos = [];
+    let losH3 = [];
+    let article = [];
+    for (let element in imagenTexto) {
+        article = document.querySelector('#article'+element);
+        cajas = document.createElement('img');
+        textos = document.createElement('p');
+        cajas.src = imagenTexto[element].src;
+        cajas.alt = imagenTexto[element].alt;
+        cajas.title = imagenTexto[element].title;
+        textos.innerHTML = imagenTexto[element].texto;
+        losH3.innerHTML = imagenTexto[element].h3;
+        article.append(cajas,textos,losH3);
+    }
+};
+
+
+//Funciones para crear del checkbox final
+const creaCheckox = () => { 
+menuDestinos.name = 'select';
+menuDestinos.id = 'destinos';
+section3.append(menuDestinos);
+};
+
+const createOption = () => {
+    let option = [];
+    for (let element in valoresOption) {
+        option = document.createElement('option');
+        option.value = valoresOption[element].valor;
+        option.text = valoresOption[element].texto;
+        menuDestinos.append(option);
+    }
+};
+
+//Llamadas a las funciones
+//Para cargar la imagen aleatoria de apertura
+creadorImagenes('figure', 'imagen-portada');
+imagenAleatoria ();
+
+//Para genera las cajas imagen-texto después del segundo H2
 crearImagenTexto(4);
-
-let article = document.querySelector('#article0')
-let imagen_viajes1 = creadorImagenes('#article0', imagen_2[0]);
+crearCajaTexto();
 
 
+//Para crear el checkbox
+creaCheckox();
+createOption();
