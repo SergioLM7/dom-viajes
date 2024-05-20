@@ -89,11 +89,13 @@ const imagenAleatoria = () => {
 //Funciones para la sección de caja imagen-h3-texto
 const crearImagenTexto = (numero) => {
     let caja = [];
+    let fragment = document.createDocumentFragment();
     for (let i = 0; i<numero; i++) {
         caja = document.createElement('article');
         caja.id= 'article' + i;
-        section2.append(caja);
+        fragment.append(caja);
     }
+    section2.append(fragment);
 };
 
 const crearCajaTexto = () => {
@@ -101,8 +103,8 @@ const crearCajaTexto = () => {
     let textos = [];
     let losH3 = [];
     let article = [];
+    let fragment = document.createDocumentFragment();
     for (let element in imagenTexto) {
-        article = document.querySelector('#article'+element);
         cajas = document.createElement('img');
         textos = document.createElement('p');
         cajas.src = imagenTexto[element].src;
@@ -110,16 +112,18 @@ const crearCajaTexto = () => {
         cajas.title = imagenTexto[element].title;
         textos.innerHTML = imagenTexto[element].texto;
         losH3.innerHTML = imagenTexto[element].h3;
-        article.append(cajas,textos,losH3);
+        fragment.append(cajas,textos,losH3);
+        article = document.querySelector('#article'+element);
+        article.append(fragment);
     }
 };
 
 
 //Funciones para crear del checkbox final
 const creaCheckox = () => { 
-menuDestinos.name = 'select';
-menuDestinos.id = 'destinos';
-section3.append(menuDestinos);
+    menuDestinos.name = 'select';
+    menuDestinos.id = 'destinos';
+    section3.append(menuDestinos);
 };
 
 const createOption = () => {
