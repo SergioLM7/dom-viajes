@@ -153,7 +153,9 @@ const crearCajaTexto = () => {
 //Función para crear los botones
 const crearBoton = () => {
     const boton = document.createElement('button');
-    boton.innerHTML = 'Enviar'
+    boton.value = 'enviar';
+    boton.type = 'button';
+    boton.textContent = 'Enviar';
     return boton;
 };
 
