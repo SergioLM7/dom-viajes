@@ -83,9 +83,9 @@ document.addEventListener('click',({target})=>{
         let id=target.id
         dibujaFotoGrande(id);
     } else {
-        let elementoABorrar = document.querySelector('#especial');
-        elementoABorrar.style.display = 'none';
+        limpiarImagenEspecial();
     }
+
 });
 
 
@@ -194,7 +194,13 @@ const dibujaFotoGrande = (id) => {
 
 };
 
+//Funcion para ocultar el div con imagen especial y recargar págna
+const limpiarImagenEspecial = () => {
+    let elementoABorrar = document.querySelector('#especial');
+    elementoABorrar.style.display = 'none';
+    location.reload();
 
+};
 
 
 //Funciones para crear del checkbox final
