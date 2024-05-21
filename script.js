@@ -2,6 +2,14 @@
 const section2 = document.querySelector('#section2');
 const section3 = document.querySelector('#section3');
 const menuDestinos = document.createElement('select');
+let fragment = document.createDocumentFragment();
+let seccionEspecial = document.querySelector('section#especial');
+let articleEspecial = document.querySelector('#article-especial');
+let divEspecial = document.createElement('div');
+let imagenEspecial = document.createElement('img');
+let parrafoEspecial = document.createElement('p');
+let h3Especial = document.createElement('h3');
+
 
 let valoresImagenes = [
     {src: './banner/1.jpg',
@@ -47,23 +55,41 @@ let imagenTexto = [
     alt: 'playa paradisíaca',
     title: 'Viajes 1',
     h3: 'Viajes 1',
-    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',
+    id: 'viaje1'},
     {src: './viajes/viajes-2.jpg',
     alt: 'cabañas en el agua',
     title: 'Viajes 2',
     h3: 'Viajes 2',
-    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',
+    id: 'viaje2',},
     {src: './viajes/viajes-3.jpg',
     alt: 'flechas de direcciones',
     title: 'Viajes 3',
     h3: 'Viajes 3',
-    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',
+    id: 'viaje3'},
     {src: './viajes/viajes-4.jpg',
     alt: 'plaza de España de Sevilla',
     title: 'Viajes 4',
     h3: 'Viajes 4',
-    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',},
+    texto: 'Este es un ejemplo de caja-texto para el ejercicio DOM viajes del bootcamp de FST de The Bridge.',
+    id: 'viaje4'},
 ]; 
+
+//Evento que muestra en qué boton se hace el click
+document.addEventListener('click',({target})=>{
+    if(target.matches('button')){
+        let id=target.id
+        dibujaFotoGrande(id);
+    } else {
+        let elementoABorrar = document.querySelector('#especial');
+        elementoABorrar.style.display = 'none';
+    }
+});
+
+
+
 
 //Funciones para mostrar las imágenes aleatorias de apertura
 //Función para crear la img.
@@ -75,14 +101,14 @@ const creadorImagenes = (element, id) => {
 };
 
 //Función para obtener valores aleatorios para la img
-const getRandomImagenes = () => {
-    return Math.floor(Math.random()* valoresImagenes.length);
+const getRandomImagenes = (arr) => {
+    return Math.floor(Math.random()* arr.length);
 };
 
 //Función para asignar src, alt y title a la imagen
 const imagenAleatoria = () => {
     let imagen = document.querySelector('img');
-    let imagenFinal = valoresImagenes[getRandomImagenes()];
+    let imagenFinal = valoresImagenes[getRandomImagenes(valoresImagenes)];
         imagen.src = imagenFinal.src;
         imagen.alt = imagenFinal.alt;
         imagen.title = imagenFinal.title;
@@ -109,7 +135,6 @@ const crearCajaTexto = () => {
     let textos = [];
     let losH3 = [];
     let article = [];
-    let fragment = document.createDocumentFragment();
     for (let element in imagenTexto) {
         cajas = document.createElement('img');
         losH3 = document.createElement('h3');
@@ -124,6 +149,50 @@ const crearCajaTexto = () => {
         article.append(fragment);
     }
 };
+
+//Función para crear los botones
+const crearBoton = () => {
+    const boton = document.createElement('button');
+    boton.innerHTML = 'Enviar'
+    return boton;
+};
+
+
+//Función para asignar a los botones los ID y subirlos al DOM
+const idBotones = (array) => {
+    let article = [];
+    array.forEach((elemento) => {
+        let botonFinal = crearBoton();
+        botonFinal.id = elemento.id;
+        let index = array.indexOf(elemento);
+        article = document.querySelector(`#article${index}`);
+        fragment.append(botonFinal);
+        article.append(fragment);
+    });
+};
+
+
+
+//Función para meter y mostrar en la nueva section el objeto al que hace referencia el ID
+const dibujaFotoGrande = (id) => {
+    let encontrado = imagenTexto.find((element) => element.id === id);
+    const {src, alt, h3, texto} = encontrado;
+    imagenEspecial.alt = alt;
+    imagenEspecial.src = src;
+    imagenEspecial.id = 'imagen-especial';
+    h3Especial.innerHTML = h3;
+    parrafoEspecial.innerHTML = texto;
+
+    fragment.append({src, alt, h3, texto});
+    imagenEspecial.append(fragment);
+    divEspecial.append(imagenEspecial);
+    divEspecial.append(h3Especial);
+    divEspecial.append(parrafoEspecial);
+    articleEspecial.append(divEspecial);
+
+};
+
+
 
 
 //Funciones para crear del checkbox final
@@ -141,8 +210,9 @@ const createOption = () => {
         option = document.createElement('option');
         option.value = valoresOption[element].valor;
         option.text = valoresOption[element].texto;
-        menuDestinos.append(option);
+        fragment.append(option)
     }
+    menuDestinos.append(fragment);
 };
 
 //Llamadas a las funciones
@@ -158,3 +228,6 @@ crearCajaTexto();
 //Para crear el checkbox
 creaCheckox();
 createOption();
+
+crearBoton();
+idBotones(imagenTexto);

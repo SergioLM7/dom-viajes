@@ -1,3 +1,5 @@
+
+
 html {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
@@ -10,58 +12,112 @@ header {
     padding: 15px 10px;
 }
 
+main {
+    flex-direction: column;
+    flex-wrap:nowrap;
+    display: flex;
+    align-self: center;
+    margin: 10px 300px 10px 300px;
+}
+
 h1 {
     color: white;
     text-align: center;
     text-anchor: unset;
 }
 
-article img {
-    width: 100px;
-    height: 100px;
+#imagen-portada {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
 }
 
-#principal {
-    border: 10px solid black;
-    width: 500px;
-    height: 250px;
+#imagen-especial {
+    width: 150%;
+}
+
+#especial {
+    display: flex;
+    flex-direction: column;
     align-self: center;
 
 }
 
 article {
+    margin: 10px 20px 10px 20px;
+}
 
-    flex: 1;
-    border: 5px solid black;
-    margin-left: 20px;
-    margin-right: 20px;
+p {
+    background-color: cornflowerblue;
 }
 
 
 
 #section1 {
-    flex-direction: column;
-    flex-wrap: wrap;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: stretch;
+    flex-wrap: wrap;
     align-self: center;
-    margin: 10px 300px 10px 300px;
-    background-color: aqua;
 }
 
 #section2 {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-content: stretch;
     flex-wrap: wrap;
     align-self: center;
     margin: 20px 300px 10px 300px;
-    background-color: red;
-
 }
 
 #section3 {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     align-self: center;
+    align-content: center;
+    width: auto;
     margin: 10px 300px 10px 300px;
 }
+
+footer {
+    flex-direction: column;
+    background-color: black;
+    display: flex;
+    align-content: center;
+    padding: 15px 10px;
+}
+
+h4 {
+    color: white;
+    text-align: center;
+    text-anchor: unset;
+}
+
+button#viaje1 {
+    background-color: red;
+    border-radius: 50px;
+    font-weight: bolder;
+}
+
+button#viaje2 {
+    background-color: blueviolet;
+    border-radius: 50px;
+    font-weight: bolder;
+
+}
+
+button#viaje3 {
+    background-color: cyan;
+    border-radius: 50px;
+    font-weight: bolder;
+}
+
+button#viaje4 {
+    background-color: greenyellow;
+    border-radius: 50px;
+    font-weight: bolder;
+}
+
