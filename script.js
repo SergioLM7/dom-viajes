@@ -1,4 +1,4 @@
-//Variables
+//Declaración de Variables y llamadas al DOM
 const section2 = document.querySelector('#section2');
 const section3 = document.querySelector('#section3');
 const menuDestinos = document.createElement('select');
@@ -66,6 +66,7 @@ let imagenTexto = [
 ]; 
 
 //Funciones para mostrar las imágenes aleatorias de apertura
+//Función para crear la img.
 const creadorImagenes = (element, id) => {
     const seccion = document.querySelector(element);
     const imagen = document.createElement("img");
@@ -73,10 +74,12 @@ const creadorImagenes = (element, id) => {
     seccion.append(imagen);
 };
 
+//Función para obtener valores aleatorios para la img
 const getRandomImagenes = () => {
     return Math.floor(Math.random()* valoresImagenes.length);
 };
 
+//Función para asignar src, alt y title a la imagen
 const imagenAleatoria = () => {
     let imagen = document.querySelector('img');
     let imagenFinal = valoresImagenes[getRandomImagenes()];
@@ -87,6 +90,7 @@ const imagenAleatoria = () => {
 
 
 //Funciones para la sección de caja imagen-h3-texto
+//Función para crear los articles que contengan las img, h3 y p
 const crearImagenTexto = (numero) => {
     let caja = [];
     let fragment = document.createDocumentFragment();
@@ -98,6 +102,8 @@ const crearImagenTexto = (numero) => {
     section2.append(fragment);
 };
 
+//Función para crear las img, h3 y p y asignarles
+//los valores del array de objetos.
 const crearCajaTexto = () => {
     let cajas = [];
     let textos = [];
@@ -106,26 +112,29 @@ const crearCajaTexto = () => {
     let fragment = document.createDocumentFragment();
     for (let element in imagenTexto) {
         cajas = document.createElement('img');
+        losH3 = document.createElement('h3');
         textos = document.createElement('p');
         cajas.src = imagenTexto[element].src;
         cajas.alt = imagenTexto[element].alt;
         cajas.title = imagenTexto[element].title;
         textos.innerHTML = imagenTexto[element].texto;
         losH3.innerHTML = imagenTexto[element].h3;
-        fragment.append(cajas,textos,losH3);
-        article = document.querySelector('#article'+element);
+        fragment.append(cajas, losH3, textos);
+        article = document.querySelector('#article' + element);
         article.append(fragment);
     }
 };
 
 
 //Funciones para crear del checkbox final
+//Función para crear el select
 const creaCheckox = () => { 
     menuDestinos.name = 'select';
     menuDestinos.id = 'destinos';
     section3.append(menuDestinos);
 };
 
+//Función para crear los option y asignarles valores y contenido
 const createOption = () => {
     let option = [];
     for (let element in valoresOption) {
